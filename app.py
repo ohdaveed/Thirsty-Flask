@@ -7,6 +7,7 @@ from flask_login import LoginManager
 
 # importing resource
 from resources.countdowns import countdowns
+
 # from resources.users import users
 
 DEBUG = True
@@ -22,6 +23,7 @@ CORS(countdowns, origins=["http://localhost:3000"], supports_credentials=True)
 app.register_blueprint(countdowns, url_prefix="/api/v1/countdowns")
 # app.register_blueprint(users, url_prefix="/api/v1/users")
 
+
 @app.before_request
 def before_request():
     """Connect to the database before each request."""
@@ -35,28 +37,31 @@ def after_request(response):
     g.db.close()
     return response
 
-@app.route('/')
+
+@app.route("/")
 def index():
-    return 'Hello, world!'
+    return "Hello, world!"
 
-@app.route('/test')
-def dog(): 
-  return ['hey', 'there'] # note -- you can't return array
 
-  # jsonify can take key value pairs
-@app.route('/cat_json')
+@app.route("/test")
+def dog():
+    return ["hey", "there"]  # note -- you can't return array
+
+    # jsonify can take key value pairs
+
+
+@app.route("/cat_json")
 def cat_json():
-  return jsonify(name="Nico", age=15)
-
+    return jsonify(name="Nico", age=15)
 
 
 # here's how to make it take URL parameter
-@app.route('/say_hello/<username>') # When someone goes here...
-def hello(username): # Do this.
-  return "Hello {}".format(username)
+@app.route("/say_hello/<username>")  # When someone goes here...
+def hello(username):  # Do this.
+    return "Hello {}".format(username)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print("tables connected")
     models.initialize()
     app.run(debug=DEBUG, port=PORT)
