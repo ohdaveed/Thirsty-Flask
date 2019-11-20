@@ -4,25 +4,28 @@ from peewee import *
 
 from flask_login import UserMixin
 
-DATABASE = SqliteDatabase('countdowns.sqlite')
+DATABASE = SqliteDatabase("countdowns.sqlite")
+
 
 class User(UserMixin, Model):
-    email = CharField(unique = True)
+    email = CharField(unique=True)
     password = CharField()
 
     class Meta:
         database = DATABASE
 
+
 class Countdown(Model):
     name = CharField()
-    owner = ForeignKey(User, backref='countdowns')
+    owner = ForeignKeyField(User, backref="countdowns")
     image = CharField()
-    timer = Integer
+    timer = IntegerField()
     created_at = DateTimeField(default=datetime.datetime.now)
     countdown_type = CharField()
 
     class Meta:
         database = DATABASE
+
 
 def initialize():
     DATABASE.connect()
