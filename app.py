@@ -1,8 +1,5 @@
 from flask import Flask, jsonify, g
-
 from flask_cors import CORS
-
-from flask_login import LoginManager
 
 import models
 
@@ -10,10 +7,8 @@ import models
 # from resources.countdowns import countdowns
 # from resources.users import users
 
-
 DEBUG = True
 PORT = 8000
-
 
 app = Flask(__name__)
 
@@ -24,7 +19,6 @@ app.secret_key = "jurgendavid"
 
 # app.register_blueprint(countdowns, url_prefix="/api/v1/countdowns")
 # app.register_blueprint(users, url_prefix="/api/v1/users")
-
 
 @app.before_request
 def before_request():
@@ -43,8 +37,25 @@ def after_request(response):
 def index():
     return 'Hello, world!'
 
+@app.route('/test')
+def dog(): 
+  return ['hey', 'there'] # note -- you can't return array
 
-if __name__ == "__main__":
+  # jsonify can take key value pairs
+@app.route('/cat_json')
+def cat_json():
+  return jsonify(name="Nico", age=15)
+
+
+
+# here's how to make it take URL parameter
+@app.route('/say_hello/<username>') # When someone goes here...
+def hello(username): # Do this.
+  return "Hello {}".format(username)
+
+
+
+if __name__ == '__main__':
     print("tables connected")
     models.initialize()
     app.run(debug=DEBUG, port=PORT)
