@@ -51,3 +51,16 @@ def create_countdown():
     countdown_dict = model_to_dict(countdown)
 
     return jsonify(data=countdown_dict, status={"code": 201, "message": "Success"}), 201
+
+# countdown show route
+@countdowns.route('/<id>', methods=["GET"])
+def get_one_countdown(id):
+
+    countdown = models.Countdown.get_by_id(id)
+
+    return jsonify(data={
+        'name': countdown.name
+        }, status={
+        'code': 200,
+        'message': "registered users can access more about this"
+        }), 200
