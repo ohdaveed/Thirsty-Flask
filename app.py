@@ -4,7 +4,7 @@ from flask_cors import CORS
 import models
 
 # importing resource
-# from resources.countdowns import countdowns
+from resources.countdowns import countdowns
 # from resources.users import users
 
 DEBUG = True
@@ -14,10 +14,10 @@ app = Flask(__name__)
 
 app.secret_key = "jurgendavid"
 
-# CORS(countdowns, origins=["http://localhost:3000"], supports_credentials=True)
+CORS(countdowns, origins=["http://localhost:3000"], supports_credentials=True)
 # CORS(users, origins=["http://localhost:3000"], supports_credentials=True)
 
-# app.register_blueprint(countdowns, url_prefix="/api/v1/countdowns")
+app.register_blueprint(countdowns, url_prefix="/api/v1/countdowns")
 # app.register_blueprint(users, url_prefix="/api/v1/users")
 
 @app.before_request
@@ -52,7 +52,6 @@ def cat_json():
 @app.route('/say_hello/<username>') # When someone goes here...
 def hello(username): # Do this.
   return "Hello {}".format(username)
-
 
 
 if __name__ == '__main__':
