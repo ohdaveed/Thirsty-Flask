@@ -7,8 +7,8 @@ from flask_login import LoginManager
 
 # importing resource
 from resources.countdowns import countdowns
+from resources.users import users
 
-# from resources.users import users
 
 DEBUG = True
 PORT = 8000
@@ -18,7 +18,7 @@ app = Flask(__name__)
 app.secret_key = "jurgendavid"
 
 CORS(countdowns, origins=["http://localhost:3000"], supports_credentials=True)
-# CORS(users, origins=["http://localhost:3000"], supports_credentials=True)
+CORS(users, origins=["http://localhost:3000"], supports_credentials=True)
 
 app.register_blueprint(countdowns, url_prefix="/api/v1/countdowns")
 # app.register_blueprint(users, url_prefix="/api/v1/users")
