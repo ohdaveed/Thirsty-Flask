@@ -14,11 +14,13 @@ countdowns = Blueprint("countdowns", "countdowns")
 
 # index route
 @countdowns.route("/", methods=["GET"])
+@login_required
 def countdowns_index():
 
     try:
-        # will hit here Jurgen makes the users side
+        this_users_countdown_instance = models.Dog.select().where(models.Dog.owner_id == current_user.id)
 
+        this_users_countdown_dicts = [model_to_dict(dog)]
         return jsonify(data={}, status={"code": 200, "message": "Success"}), 200
 
     except models.DoesNotExist:
@@ -33,7 +35,6 @@ def countdowns_index():
             401,
         )
 
-
 #create countdown route
 @countdowns.route("/", methods=["POST"])
 def create_countdown():
@@ -41,10 +42,9 @@ def create_countdown():
 
     countdown = models.Countdown.create(
         name=payload["name"],
-        # image=payload["image"],
-        # # timer=payload["timer"],
-        # # owner=current_user.id,
-        
+        image=payload["image"],
+        timer=payload["timer"],
+        owner=current_user.id,
     )
 
     print(model_to_dict(countdown), "model_to_dict")
@@ -65,24 +65,24 @@ def get_one_countdown(id):
         'message': "registered users can access more about this"
         }), 200
 
-# # update route
-# @countdowns.route('/<id>', methods=["PUT"])
-# def update_countdown(id):
+# update route
+@countdowns.route('/<id>', methods=["PUT"])
+def update_countdown(id):
 
-#     payload = request.get.json()
+    payload = request.get.json()
 
-#     countdown = models.Countdown.get_by_id(id)
+    countdown = models.Countdown.get_by_id(id)
 
 
-#     countdown.name = payload['name'] if 'name' in payload else None
+    countdown.name = payload['name'] if 'name' in payload else None
 
-#     countdown.save()
+    countdown.save()
 
-#     countdown_dict = model_to_dict(countdown) 
+    countdown_dict = model_to_dict(countdown) 
 
-#     return jsonify(data=countdown_dict, status={
-#         'code': 200,
-#         'message': 'Resource updated successfully'}), 200
+    return jsonify(data=countdown_dict, status={
+        'code': 200,
+        'message': 'Resource updated successfully'}), 200
 
 
 @countdowns.route('/<id>', methods=["Delete"])
