@@ -65,29 +65,25 @@ def get_one_countdown(id):
         'message': "registered users can access more about this"
         }), 200
 
-# update route
-# @countdowns.route('/<id>', methods=['PUT'])
-# def update_dog(id):
+# # update route
+# @countdowns.route('/<id>', methods=["PUT"])
+# def update_countdown(id):
+
 #     payload = request.get.json()
 
 #     countdown = models.Countdown.get_by_id(id)
 
-#     if(countdown.name == 'Jesus'):
 
-#         countdown.name = payload['name'] if 'name' in payload else None
+#     countdown.name = payload['name'] if 'name' in payload else None
 
-#         countdown.save()
+#     countdown.save()
 
-#         countdown_dict = model_to_dict(countdown)
+#     countdown_dict = model_to_dict(countdown) 
 
-#         return jsonify(data={"Will update"}, status={
-#             'code': 200,
-#             'message': 'Resource updated successfully'}), 200
+#     return jsonify(data=countdown_dict, status={
+#         'code': 200,
+#         'message': 'Resource updated successfully'}), 200
 
-#     else:
-#         return jsonify(data="Forbidden", status={
-#             'code': 403,
-#             'message': 'I want this to show until jurgen has users set up'}), 403
 
 @countdowns.route('/<id>', methods=["Delete"])
 def delete_countdown(id):
