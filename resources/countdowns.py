@@ -95,6 +95,18 @@ def delete_countdown(id):
 
     return jsonify(data='Countdown delete successfully', status={"code": 200, "message": "{} deleted successfully".format(countdown_name)})
 
+@countdowns.route('/countdowns/all', methods={"GET"})
+def show_countdowns_all_users():
+    return (
+            jsonify(
+                data={},
+                status={
+                    "code": 401,
+                    "message": "making a placehold until Jurgen creates users.py",
+                },
+            ),
+            401,
+        )
 
     
 

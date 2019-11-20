@@ -43,13 +43,6 @@ def index():
     return "Hello, world!"
 
 
-@app.route("/test")
-def dog():
-    return ["hey", "there"]  # note -- you can't return array
-
-    # jsonify can take key value pairs
-
-
 @app.route("/cat_json")
 def cat_json():
     return jsonify(name="Nico", age=15)
