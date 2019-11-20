@@ -58,15 +58,9 @@ def list_users():
     for u in users:
         print(u)
 
-    user_dicts = [model_to_dict(u) for u in users]
+    user_dicts = [model_to_dict(u).pop('email') for u in users]
 
-    def remove_password(u):
-        u.pop('password')
-        return user_dict
-
-    users_dicts_without_pw = list(map(remove_password, user_dict))
-
-    return jsonify(data=users_dicts_without_pw), 200
+    return jsonify(data=user_dicts), 200
 
 @users.route('/logged_in', methods=['GET'])
 def get_logged_in_user():
