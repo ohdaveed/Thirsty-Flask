@@ -18,10 +18,13 @@ countdowns = Blueprint("countdowns", "countdowns")
 def countdowns_index():
 
     try:
-        this_users_countdown_instance = models.Dog.select().where(models.Dog.owner_id == current_user.id)
+        this_user_countdown_instances = models.Countdown.select().where(models.Countdown.owner_id == current_user.id)
 
-        this_users_countdown_dicts = [model_to_dict(dog)]
-        return jsonify(data={}, status={"code": 200, "message": "Success"}), 200
+        this_users_countdown_dicts = [model_to_dict(countdown) for countdown in this_user_countdown_instances]
+
+        this_users_countdown_dicts_no_password = [countdown['owner'].pop('password', None) for countdown in this_users_countdown_dicts]
+
+        return jsonify(data=this_users_countdown_dicts, status={"code": 200, "message": "Success"}), 200
 
     except models.DoesNotExist:
         return (
@@ -55,33 +58,53 @@ def create_countdown():
 
     return jsonify(data=countdown_dict, status={"code": 201, "message": "Success"}), 201
 
+
+
 # countdown show route
 @countdowns.route('/<id>', methods=["GET"])
 def get_one_countdown(id):
 
     countdown = models.Countdown.get_by_id(id)
 
-    return jsonify(data={
-        'name': countdown.name
+    if not current_user.is_authenticated:
+        return jsonify(data={
+        'name': countdown.name,
+        'timer': countdown.timer
         }, status={
         'code': 200,
         'message': "registered users can access more about this"
         }), 200
 
+    else:
+        countdown_dict = model_to_dict(countdown)
+        countdown_dict['owner'].pop('password')
+
+        if countdown.owner_id != current_user.id:
+            countdown_dict.pop('created_at')
+
+        return jsonify(data=countdown_dict, status={
+            'code': 200,
+            'message': 'Found countdown with id {}'.format(countdown.id)
+            }), 200
+
 # update route
 @countdowns.route('/<id>', methods=["PUT"])
 def update_countdown(id):
 
-    payload = request.get.json()
+    payload = request.get_json()
 
     countdown = models.Countdown.get_by_id(id)
 
 
     countdown.name = payload['name'] if 'name' in payload else None
 
+    countdown.image = payload['image'] if 'image' in payload else None
+
+    countdown.timer = payload['timer'] if 'timer' in payload else None
+
     countdown.save()
 
-    countdown_dict = model_to_dict(countdown) 
+    countdown_dict = model_to_dict(countdown)
 
     return jsonify(data=countdown_dict, status={
         'code': 200,
