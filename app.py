@@ -3,6 +3,8 @@ from flask_cors import CORS
 
 import models
 
+from flask_login import LoginManager
+
 # importing resource
 from resources.countdowns import countdowns
 # from resources.users import users
