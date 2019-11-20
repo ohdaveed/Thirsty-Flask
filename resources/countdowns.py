@@ -36,14 +36,14 @@ def countdowns_index():
 
 #create countdown route
 @countdowns.route("/", methods=["POST"])
-def create_countdown():
+@login_required
+def create_countdown(current_user_id):
     payload = request.get_json()
-
     countdown = models.Countdown.create(
         name=payload["name"],
-        # image=payload["image"],
-        # # timer=payload["timer"],
-        # # owner=current_user.id,
+        image=payload["image"],
+        timer=payload["timer"],
+        owner=current_user.id,
         
     )
 
@@ -73,7 +73,7 @@ def get_one_countdown(id):
 
 #     countdown = models.Countdown.get_by_id(id)
 
-
+#     if(countdown.)
 #     countdown.name = payload['name'] if 'name' in payload else None
 
 #     countdown.save()
@@ -85,6 +85,7 @@ def get_one_countdown(id):
 #         'message': 'Resource updated successfully'}), 200
 
 
+## delete route
 @countdowns.route('/<id>', methods=["Delete"])
 def delete_countdown(id):
 
@@ -95,6 +96,8 @@ def delete_countdown(id):
 
     return jsonify(data='Countdown delete successfully', status={"code": 200, "message": "{} deleted successfully".format(countdown_name)})
 
+
+# show route
 @countdowns.route('/countdowns/all', methods={"GET"})
 def show_countdowns_all_users():
     return (
