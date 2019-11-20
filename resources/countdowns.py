@@ -29,7 +29,7 @@ def countdowns_index():
                 data={},
                 status={
                     "code": 401,
-                    "message": "making a placehold until Jurgen creates users.py",
+                    "message": "Error getting the resources",
                 },
             ),
             401,
@@ -37,6 +37,7 @@ def countdowns_index():
 
 #create countdown route
 @countdowns.route("/", methods=["POST"])
+@login_required
 def create_countdown():
     payload = request.get_json()
 
@@ -49,6 +50,8 @@ def create_countdown():
 
     print(model_to_dict(countdown), "model_to_dict")
     countdown_dict = model_to_dict(countdown)
+
+    countdown_dict['owner'].pop('password')
 
     return jsonify(data=countdown_dict, status={"code": 201, "message": "Success"}), 201
 
