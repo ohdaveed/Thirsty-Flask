@@ -7,6 +7,7 @@ from flask_login import LoginManager
 
 # importing resource
 from resources.countdowns import countdowns
+from resources.users import users
 
 # from resources.users import users
 
@@ -17,11 +18,17 @@ app = Flask(__name__)
 
 app.secret_key = "jurgendavid"
 
+login_manager = LoginManager()
+
+login_manager.init_app(app)
+
 CORS(countdowns, origins=["http://localhost:3000"], supports_credentials=True)
-# CORS(users, origins=["http://localhost:3000"], supports_credentials=True)
+
+CORS(users, origins=["http://localhost:3000"], supports_credentials=True)
 
 app.register_blueprint(countdowns, url_prefix="/api/v1/countdowns")
-# app.register_blueprint(users, url_prefix="/api/v1/users")
+
+app.register_blueprint(users, url_prefix="/api/v1/users")
 
 
 @app.before_request
