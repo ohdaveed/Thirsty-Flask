@@ -1,2 +1,4 @@
-requirements.txt
 countdowns.sqlite
+.env
+*.sqlite
+*.pyc

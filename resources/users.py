@@ -23,6 +23,8 @@ def register():
         login_user(user)
         user_dict = model_to_dict(user)
 
+        print(user_dict)
+
         del user_dict['password']
         return jsonify(data=user_dict, status={'code': 201, 'message': 'Successfully registered {}'.format(user_dict['email'])}), 201
 
@@ -62,7 +64,7 @@ def list_users():
         u.pop('password')
         return user_dict
 
-    users_dicts_without_pw = list(map(remove_password, user_dicts))
+    users_dicts_without_pw = list(map(remove_password, user_dict))
 
     return jsonify(data=users_dicts_without_pw), 200
 
