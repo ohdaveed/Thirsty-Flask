@@ -41,7 +41,6 @@ def countdowns_index():
 #create countdown route
 @countdowns.route("/", methods=["POST"])
 @login_required
-<<<<<<< HEAD
 def create_countdown(current_user_id):
     payload = request.get_json()
     countdown = models.Countdown.create(
