@@ -21,6 +21,7 @@ class Countdown(Model):
     image = CharField()
     timer = IntegerField()
     created_at = DateTimeField(default=datetime.datetime.now)
+    last_watered = IntegerField()
     countdown_type = CharField()
 
     class Meta:
