@@ -58,22 +58,6 @@ def after_request(response):
     return response
 
 
-@app.route("/")
-def index():
-    return "Hello, world!"
-
-
-@app.route("/cat_json")
-def cat_json():
-    return jsonify(name="Nico", age=15)
-
-
-# here's how to make it take URL parameter
-@app.route("/say_hello/<username>")  # When someone goes here...
-def hello(username):  # Do this.
-    return "Hello {}".format(username)
-
-
 if __name__ == "__main__":
     print("tables connected")
     models.initialize()
