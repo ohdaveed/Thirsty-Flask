@@ -6,6 +6,11 @@ from flask_login import current_user, login_required
 
 from playhouse.shortcuts import model_to_dict
 
+import datetime
+import time
+
+
+
 countdowns = Blueprint("countdowns", "countdowns")
 
 # index route
@@ -133,5 +138,28 @@ def show_countdowns_all_users():
             401,
         )
 
+# water plant
+@countdowns.route('/updatetime/<id>', methods={"PUT"})
+def countdown_last_watered(id):
     
+    now = time.time()
+
+    countdown = models.Countdown.get_by_id(id)
+
+    countdown.last_watered = now
+
+    countdown.save()
+
+    countdown = models.Countdown.get_by_id(id)
+    countdown_dict = model_to_dict(countdown)
+
+
+    return jsonify(data=countdown_dict, status={
+        'code': 200,
+        'message': 'Resource updated successfully'}), 200
+
+
+# set last_watered to be now
+
+
 
