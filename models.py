@@ -19,10 +19,9 @@ class Countdown(Model):
     name = CharField()
     owner = ForeignKeyField(User, backref="countdowns")
     image = CharField()
-    period = IntegerField()
+    timer = IntegerField()
     created_at = DateTimeField(default=datetime.datetime.now)
     last_watered = IntegerField()
-    countdown_type = CharField()
 
     class Meta:
         database = DATABASE
