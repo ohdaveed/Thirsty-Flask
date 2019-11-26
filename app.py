@@ -57,6 +57,10 @@ def after_request(response):
     g.db.close()
     return response
 
+@app.route("/")
+def index():
+    return "Hello, world!"
+
 
 if __name__ == "__main__":
     print("tables connected")
