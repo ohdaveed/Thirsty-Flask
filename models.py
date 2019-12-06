@@ -33,7 +33,7 @@ class Countdown(Model):
     image = CharField()
     timer = IntegerField()
     created_at = DateTimeField(default=datetime.datetime.now)
-    last_watered = IntegerField(null=False)
+    last_watered = IntegerField(null=True)
 
     class Meta:
         database = DATABASE
