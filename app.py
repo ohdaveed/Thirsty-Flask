@@ -38,8 +38,8 @@ def unauthorized():
         'message': 'you must be loggesd into access that resource'
         }), 401
 
-CORS(countdowns, origins=["http://localhost:3000"], supports_credentials=True)
-CORS(users, origins=["http://localhost:3000"], supports_credentials=True)
+CORS(countdowns, origins=["http://localhost:3000", 'https://thirstyy-app.herokuapp.com'], supports_credentials=True)
+CORS(users, origins=["http://localhost:3000", 'https://thirstyy-app.herokuapp.com'], supports_credentials=True)
 
 app.register_blueprint(countdowns, url_prefix="/api/v1/countdowns")
 
