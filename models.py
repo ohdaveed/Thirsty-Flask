@@ -1,10 +1,8 @@
 import os
 
 import datetime
-
-from peewee import *
-
 from flask_login import UserMixin
+from peewee import *
 
 from playhouse.db_url import connect
 
@@ -44,4 +42,3 @@ def initialize():
     DATABASE.create_tables([User, Countdown], safe=True)
     print("Created tables if they weren't already there")
     DATABASE.close()
-

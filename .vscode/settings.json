@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "${workspaceFolder}/countdowns.sqlite",
+            "dialect": "SQLite",
+            "name": "countdowns"
+        }
+    ],
+    "sqltools.useNodeRuntime": true,
+    "python.formatting.provider": "black"
+}
