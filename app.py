@@ -46,8 +46,16 @@ def unauthorized():
     )
 
 
-CORS(countdowns, origins=["https://thirstyy.herokuapp.com/", 'https://thirstyy-app.herokuapp.com'], supports_credentials=True)
-CORS(users, origins=["https://thirstyy.herokuapp.com/", 'https://thirstyy-app.herokuapp.com'], supports_credentials=True)
+CORS(
+    countdowns,
+    origins=["https://thirstyy.herokuapp.com/", "https://thirstyy-app.herokuapp.com"],
+    supports_credentials=True,
+)
+CORS(
+    users,
+    origins=["https://thirstyy.herokuapp.com/", "https://thirstyy-app.herokuapp.com"],
+    supports_credentials=True,
+)
 
 app.register_blueprint(countdowns, url_prefix="/api/v1/countdowns")
 
@@ -72,12 +80,13 @@ def after_request(response):
 def index():
     return "Hello, world!"
 
-# ADD THESE THREE LINES -- because in production the app will be run with 
+
+# ADD THESE THREE LINES -- because in production the app will be run with
 # gunicorn instead of by the three lines below, so we want to initialize the
 # tables in that case as well
-if 'ON_HEROKU' in os.environ: 
-  print('\non heroku!')
-  models.initialize()
+if "ON_HEROKU" in os.environ:
+    print("\non heroku!")
+    models.initialize()
 
 
 if __name__ == "__main__":
