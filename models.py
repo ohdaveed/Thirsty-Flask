@@ -1,8 +1,6 @@
 import datetime
-
-from peewee import *
-
 from flask_login import UserMixin
+from peewee import *
 
 DATABASE = SqliteDatabase("countdowns.sqlite")
 
@@ -21,7 +19,7 @@ class Countdown(Model):
     image = CharField()
     timer = IntegerField()
     created_at = DateTimeField(default=datetime.datetime.now)
-    last_watered = IntegerField()
+    last_watered = IntegerField(default=0)
 
     class Meta:
         database = DATABASE
@@ -32,4 +30,3 @@ def initialize():
     DATABASE.create_tables([User, Countdown], safe=True)
     print("Created tables if they weren't already there")
     DATABASE.close()
-
