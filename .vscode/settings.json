@@ -7,5 +7,6 @@
         }
     ],
     "sqltools.useNodeRuntime": true,
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "python.pythonPath": "/home/arrizondavid/.pyenv/versions/.env/bin/python"
 }
