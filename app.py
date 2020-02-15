@@ -4,7 +4,6 @@ from flask import Flask, jsonify, g
 from flask_cors import CORS
 
 import models
-
 from flask_login import LoginManager
 
 # importing resource
