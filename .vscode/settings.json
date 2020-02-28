@@ -8,7 +8,7 @@
     ],
     "sqltools.useNodeRuntime": true,
     "python.formatting.provider": "black",
-    "python.pythonPath": "/home/arrizondavid/.local/share/virtualenvs/Thirsty-Flask-bAJKF0If/bin/python",
+    "python.pythonPath": "/home/arrizondavid/.local/share/virtualenvs/Thirsty-Flask-xx6IQ8Dd/bin/python",
     "python.linting.enabled": true,
     "python.testing.unittestArgs": [
         "-v",

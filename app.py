@@ -45,8 +45,8 @@ def unauthorized():
     )
 
 
-CORS(countdowns, origins=["*"], supports_credentials=True)
-CORS(users, origins=["*"], supports_credentials=True)
+CORS(countdowns, origins=['http://localhost:3000', 'https://thirst-e.herokuapp.com'], supports_credentials=True)
+CORS(users, origins=['http://localhost:3000', 'https://thirst-e.herokuapp.com'], supports_credentials=True)
 
 # app.register_blueprint(countdowns, url_prefix="/api/v1/countdowns")
 # app.register_blueprint(users, url_prefix="/api/v1/users")
