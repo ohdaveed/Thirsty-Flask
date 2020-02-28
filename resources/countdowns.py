@@ -43,7 +43,7 @@ def countdowns_index():
         return (
             jsonify(
                 data={},
-                status={"code": 401, "message": "Error getting the resources",},
+                status={"code": 401, "message": "Error getting the resources", },
             ),
             401,
         )
@@ -133,7 +133,7 @@ def update_countdown(id):
     )
 
 
-## delete route
+# delete route
 @countdowns.route("/<id>", methods=["Delete"])
 def delete_countdown(id):
 
@@ -191,4 +191,3 @@ def countdown_last_watered(id):
 
 
 # set last_watered to be now
-

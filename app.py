@@ -1,15 +1,13 @@
 import os
 
-from flask import Flask, jsonify, g
+from flask import Flask, g, jsonify
 from flask_cors import CORS
-
-import models
 from flask_login import LoginManager
 
+import models
 # importing resource
 from resources.countdowns import countdowns
 from resources.users import users
-
 
 DEBUG = True
 PORT = 8000
@@ -45,8 +43,11 @@ def unauthorized():
     )
 
 
-CORS(countdowns, origins=['http://localhost:3000', 'https://thirst-e.herokuapp.com'], supports_credentials=True)
-CORS(users, origins=['http://localhost:3000', 'https://thirst-e.herokuapp.com'], supports_credentials=True)
+CORS(countdowns, origins=['http://localhost:3000',
+                          'https://thirst-e.herokuapp.com'], supports_credentials=True)
+                          
+CORS(users, origins=['http://localhost:3000',
+                     'https://thirst-e.herokuapp.com'], supports_credentials=True)
 
 # app.register_blueprint(countdowns, url_prefix="/api/v1/countdowns")
 # app.register_blueprint(users, url_prefix="/api/v1/users")

@@ -7,6 +7,7 @@ from playhouse.shortcuts import model_to_dict
 
 users = Blueprint('users', 'users')
 
+
 @users.route('/register', methods=['POST'])
 def register():
     payload = request.get_json()
@@ -27,6 +28,7 @@ def register():
 
         del user_dict['password']
         return jsonify(data=user_dict, status={'code': 201, 'message': 'Successfully registered {}'.format(user_dict['email'])}), 201
+
 
 @users.route('/login', methods=['POST'])
 def login():
@@ -52,6 +54,7 @@ def login():
         print('email not found')
         return jsonify(data={}, status={'code': 401, 'message': 'Email or password is incorrect'}), 401
 
+
 @users.route('/', methods=['GET'])
 def list_users():
     users = models.User.select()
@@ -62,18 +65,20 @@ def list_users():
 
     return jsonify(data=user_dicts), 200
 
+
 @users.route('/logged_in', methods=['GET'])
 def get_logged_in_user():
     if not current_user.is_authenticated:
         return jsonify(data={}, status={
-                'code': 401,
-                'message': "No user is currently logged in"
-            }), 401
-    else: 
+            'code': 401,
+            'message': "No user is currently logged in"
+        }), 401
+    else:
         user_dict = model_to_dict(current_user)
         print(user_dict)
         user_dict.pop('password')
         return jsonify(data=user_dict, status={'code': 200, 'message': "Current user is {}".format(user_dict['email'])}), 200
+
 
 @users.route('/logout', methods=['GET'])
 def logout():
@@ -81,4 +86,3 @@ def logout():
     logout_user()
 
     return jsonify(data={}, status={'code': 200, 'message': "Successfully logged out {}".format(email)})
-
