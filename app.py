@@ -45,7 +45,7 @@ def unauthorized():
 
 CORS(countdowns, origins=['http://localhost:3000',
                           'https://thirst-e.herokuapp.com'], supports_credentials=True)
-                          
+
 CORS(users, origins=['http://localhost:3000',
                      'https://thirst-e.herokuapp.com'], supports_credentials=True)
 
@@ -84,8 +84,6 @@ if "ON_HEROKU" in os.environ:
     print("\non heroku!")
     models.initialize()
 
-
 if __name__ == "__main__":
-    print("tables connected")
     models.initialize()
     app.run(debug=DEBUG, port=PORT)
