@@ -54,7 +54,6 @@ CORS(users, origins=['http://localhost:3000',
 
 
 app.register_blueprint(countdowns, url_prefix="/api/v1/countdowns")
-
 app.register_blueprint(users, url_prefix="/api/v1/users")
 
 

@@ -13,7 +13,8 @@ if 'ON_HEROKU' in os.environ:  # later we will manually add this env var
     # when you provision the
     # Heroku Postgres Add-on
 else:
-    DATABASE = SqliteDatabase("countdowns.sqlite")
+    # DATABASE = SqliteDatabase("countdowns.sqlite")
+    DATABASE = PostgresqlDatabase('d822r0pkb0i0f6', user='ynsccchyhuvprp')
 
 
 class User(UserMixin, Model):
