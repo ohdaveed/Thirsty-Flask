@@ -44,6 +44,7 @@ PyYAML = "==5.3"
 Werkzeug = "==1.0.0"
 postgres = "*"
 psycopg2 = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.8.1"
