@@ -1,4 +1,5 @@
 countdowns.sqlite
 .env
+*.sql
 *.sqlite
 *.pyc
