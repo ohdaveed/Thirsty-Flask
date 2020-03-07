@@ -1,5 +1,4 @@
 import os
-import psycopg2
 
 import datetime
 from flask_login import UserMixin
@@ -15,7 +14,7 @@ if 'ON_HEROKU' in os.environ:  # later we will manually add this env var
     # Heroku Postgres Add-on
 else:
     # DATABASE = SqliteDatabase("countdowns.sqlite")
-    DATABASE = PostgresqlDatabase('', user='')
+    DATABASE = PostgresqlDatabase('countdowns', user='postgres')
 
 
 class User(UserMixin, Model):
